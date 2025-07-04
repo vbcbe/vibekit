@@ -16,7 +16,6 @@ export const inngest = new Inngest({
   id: "vibe0",
   eventKey: process.env.INNGEST_EVENT_KEY,  // Add this line
   middleware: [realtimeMiddleware()],
-  baseUrl: process.env.INNGEST_ORIGIN,
 });
 
 export const sessionChannel = channel("sessions")
@@ -45,7 +44,6 @@ export const getInngestApp = () => {
     id: typeof window !== "undefined" ? "client" : "server",
     eventKey: process.env.INNGEST_EVENT_KEY,  // Add this line
     middleware: [realtimeMiddleware()],
-    baseUrl: process.env.INNGEST_ORIGIN,
   }));
 };
 
