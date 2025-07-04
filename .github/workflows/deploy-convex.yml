@@ -24,19 +24,20 @@ jobs:
           npm install
           npm install -g convex
 
-      - name: Deploy Convex
-        env:
-          CONVEX_URL: ${{ secrets.CONVEX_URL }}
-          CONVEX_ADMIN_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
-          NODE_TLS_REJECT_UNAUTHORIZED: '0' # Only if you're having SSL issues
+      - name: Create Convex config
         run: |
-          # Create convex config for self-hosted instance
           echo '{
             "project": "default",
             "team": "team",
             "deploymentUrl": "${{ secrets.CONVEX_URL }}",
             "adminKey": "${{ secrets.CONVEX_ADMIN_KEY }}"
           }' > convex.json
-          
-          # Deploy to self-hosted instance
-          npx convex deploy --url ${{ secrets.CONVEX_URL }} --admin-key ${{ secrets.CONVEX_ADMIN_KEY }}
+        shell: bash
+
+      - name: Deploy Convex
+        env:
+          CONVEX_URL: ${{ secrets.CONVEX_URL }}
+          CONVEX_ADMIN_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
+          NODE_TLS_REJECT_UNAUTHORIZED: '0'
+        run: npx convex deploy
+        shell: bash
