@@ -15,7 +15,7 @@ let app: Inngest | undefined;
 export const inngest = new Inngest({
   id: "vibe0",
   middleware: [realtimeMiddleware()],
-  baseUrl: process.env.INNGEST_ORIGIN,
+  // baseUrl: process.env.INNGEST_ORIGIN,
 });
 
 export const sessionChannel = channel("sessions")
@@ -43,7 +43,7 @@ export const getInngestApp = () => {
   return (app ??= new Inngest({
     id: typeof window !== "undefined" ? "client" : "server",
     middleware: [realtimeMiddleware()],
-    baseUrl: process.env.INNGEST_ORIGIN,
+    // baseUrl: process.env.INNGEST_ORIGIN,
   }));
 };
 
