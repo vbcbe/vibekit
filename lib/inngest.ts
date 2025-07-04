@@ -15,6 +15,7 @@ let app: Inngest | undefined;
 export const inngest = new Inngest({
   id: "vibe0",
   middleware: [realtimeMiddleware()],
+  baseUrl: process.env.INNGEST_ORIGIN,
 });
 
 export const sessionChannel = channel("sessions")
