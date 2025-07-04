@@ -43,6 +43,7 @@ export const getInngestApp = () => {
   return (app ??= new Inngest({
     id: typeof window !== "undefined" ? "client" : "server",
     middleware: [realtimeMiddleware()],
+    baseUrl: process.env.INNGEST_ORIGIN,
   }));
 };
 
