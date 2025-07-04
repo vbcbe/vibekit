@@ -243,13 +243,12 @@ export const createSession = inngest.createFunction(
         },
       },
       environment: {
-        northflank: {
-          apiKey: process.env.NORTHFLANK_API_KEY!,
-          projectId: process.env.NORTHFLANK_PROJECT_ID!,
-          image: template.image ? template.image : undefined,
+        modal: {  // Change from northflank to modal
+          apiKey: process.env.MODAL_TOKEN!,  // Your Modal token
         },
       },
       secrets: template.secrets,
+      sessionId,
     };
 
     const vibekit = new VibeKit(config);
