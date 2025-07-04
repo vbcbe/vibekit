@@ -1,0 +1,33 @@
+name: Deploy Convex Functions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'convex/**' # Only trigger on changes to convex functions
+      - '.github/workflows/deploy-convex.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install -g convex
+
+      - name: Configure and Deploy Convex
+        env:
+          CONVEX_URL: ${{ secrets.CONVEX_URL }}
+          CONVEX_ADMIN_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
+        run: |
+          npx convex configure --url $CONVEX_URL --admin-key $CONVEX_ADMIN_KEY
+          npx convex deploy
