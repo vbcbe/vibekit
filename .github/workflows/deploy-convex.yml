@@ -1,5 +1,4 @@
 name: Deploy Convex Functions
-
 on:
   push:
     branches:
@@ -17,27 +16,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'  # Updated to Node 20
           
       - name: Install dependencies
         run: |
           npm install
           npm install -g convex
-
-      - name: Create Convex config
-        run: |
-          echo '{
-            "project": "default",
-            "team": "team",
-            "deploymentUrl": "${{ secrets.CONVEX_URL }}",
-            "adminKey": "${{ secrets.CONVEX_ADMIN_KEY }}"
-          }' > convex.json
-        shell: bash
-
-      - name: Deploy Convex
+          
+      - name: Deploy to self-hosted Convex
         env:
           CONVEX_URL: ${{ secrets.CONVEX_URL }}
-          CONVEX_ADMIN_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
-          NODE_TLS_REJECT_UNAUTHORIZED: '0'
-        run: npx convex deploy
-        shell: bash
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
+        run: |
+          # For self-hosted Convex, you might need to use a different command
+          # or push functions directly to your Railway deployment
+          npx convex deploy --url $CONVEX_URL --admin-key $CONVEX_DEPLOY_KEY
