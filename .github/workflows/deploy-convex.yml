@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'convex/**' # Only trigger on changes to convex functions
+      - 'convex/**'
       - '.github/workflows/deploy-convex.yml'
 
 jobs:
@@ -24,10 +24,10 @@ jobs:
           npm install
           npm install -g convex
 
-      - name: Configure and Deploy Convex
+      - name: Deploy Convex
         env:
-          CONVEX_URL: ${{ secrets.CONVEX_URL }}
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_URL }}
           CONVEX_ADMIN_KEY: ${{ secrets.CONVEX_ADMIN_KEY }}
         run: |
-          npx convex configure --url $CONVEX_URL --admin-key $CONVEX_ADMIN_KEY
+          echo '{"project": "default"}' > convex.json
           npx convex deploy
