@@ -14,8 +14,8 @@ let app: Inngest | undefined;
 // Create a client to send and receive events
 export const inngest = new Inngest({
   id: "vibe0",
-  eventKey: process.env.INNGEST_EVENT_KEY,  // Add this line
   middleware: [realtimeMiddleware()],
+  baseUrl: process.env.INNGEST_ORIGIN,
 });
 
 export const sessionChannel = channel("sessions")
@@ -42,8 +42,8 @@ export const sessionChannel = channel("sessions")
 export const getInngestApp = () => {
   return (app ??= new Inngest({
     id: typeof window !== "undefined" ? "client" : "server",
-    eventKey: process.env.INNGEST_EVENT_KEY,  // Add this line
     middleware: [realtimeMiddleware()],
+    baseUrl: process.env.INNGEST_ORIGIN,
   }));
 };
 
@@ -243,12 +243,13 @@ export const createSession = inngest.createFunction(
         },
       },
       environment: {
-        modal: {  // Change from northflank to modal
-          apiKey: process.env.MODAL_TOKEN!,  // Your Modal token
+        northflank: {
+          apiKey: process.env.NORTHFLANK_API_KEY!,
+          projectId: process.env.NORTHFLANK_PROJECT_ID!,
+          image: template.image ? template.image : undefined,
         },
       },
       secrets: template.secrets,
-      sessionId,
     };
 
     const vibekit = new VibeKit(config);
