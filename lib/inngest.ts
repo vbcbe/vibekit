@@ -51,7 +51,7 @@ export const getInngestApp = () => {
 };
 
 export const runAgent = inngest.createFunction(
-  { id: "run-agent", retries: 0, concurrency: 100 },
+  { id: "run-agent", retries: 0, concurrency: 25 },
   { event: "vibe0/run.agent" },
   async ({ event, step }) => {
     const { sessionId, id, message, template } = event.data;
@@ -218,7 +218,7 @@ export const runAgent = inngest.createFunction(
 );
 
 export const createSession = inngest.createFunction(
-  { id: "create-session", retries: 0, concurrency: 100 },
+  { id: "create-session", retries: 0, concurrency: 25 },
   { event: "vibe0/create.session" },
 
   async ({ event, step }) => {
