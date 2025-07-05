@@ -58,9 +58,9 @@ export const runAgent = inngest.createFunction(
 
     const config: VibeKitConfig = {
       agent: {
-        type: "claude",
+        type: "codex",
         model: {
-          apiKey: process.env.ANTHROPIC_API_KEY!,
+          apiKey: process.env.OPENAI_API_KEY!,
         },
       },
       environment: {
@@ -240,9 +240,9 @@ export const createSession = inngest.createFunction(
 
     const config: VibeKitConfig = {
       agent: {
-        type: "claude",
+        type: "codex",
         model: {
-          apiKey: process.env.ANTHROPIC_API_KEY!,
+          apiKey: process.env.OPENAI_API_KEY!,
         },
       },
       environment: {
