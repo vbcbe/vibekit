@@ -7,4 +7,6 @@ export const maxDuration = 300;
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [runAgent, createSession],
+  signingKey: process.env.INNGEST_SIGNING_KEY,
+
 });
