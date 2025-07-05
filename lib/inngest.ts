@@ -16,6 +16,7 @@ export const inngest = new Inngest({
   id: "vibe0",
   middleware: [realtimeMiddleware()],
   eventKey: process.env.INNGEST_EVENT_KEY,
+  signingKey: process.env.INNGEST_SIGNING_KEY,
 
   // baseUrl: process.env.INNGEST_ORIGIN,
 });
